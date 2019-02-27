@@ -240,7 +240,7 @@ public class Robot extends TimedRobot {
       }else if(joystickBtns[10] == true){
         LEDs.set(-.83);
       }else if(joystickBtns[9] == true){
-        LEDs.set(-.81);
+        LEDs.set(-.80);
       }
 
 
