@@ -84,6 +84,7 @@ public class Robot extends TimedRobot {
     //Defines the Camera Servers
     UsBCam1 = CameraServer.getInstance().startAutomaticCapture(0);
     UsBCam2 = CameraServer.getInstance().startAutomaticCapture(1);
+    UsBCam1.setBrightness(10);
     server = CameraServer.getInstance().getServer();
   }
 
@@ -209,14 +210,26 @@ public class Robot extends TimedRobot {
         dartOne.set(-.5);
       }else if(operatorBoardBtns[8] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 150 == true && dartOneExtendLimit.get() == true){
         dartOne.set(.8);
+      }else if(operatorBoardBtns[8] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 170 && dartOnePot.get() > 150 && dartTwoPot.get() > 220){
+        dartTwo.set(-.5);
+      }else if(operatorBoardBtns[8] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 170 && dartOnePot.get() > 150 && dartTwoPot.get() < 216){
+        dartTwo.set(.5);
       }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 242 == true){
         dartOne.set(-.5);
       }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 238 == true){
         dartOne.set(.8);
+      }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 244 && dartOnePot.get() > 236 && dartTwoPot.get() > 137){
+        dartTwo.set(-.5);
+      }else if(operatorBoardBtns[9] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 244 && dartOnePot.get() > 236 && dartTwoPot.get() < 133){
+        dartTwo.set(.8);
       }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 332 == true){
         dartOne.set(-.5);
       }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 328 == true){
         dartOne.set(.8);
+      }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 334 == true && dartOnePot.get() > 324 == true && dartTwoPot.get() > 331){
+        dartTwo.set(-.5);
+      }else if(operatorBoardBtns[10] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 334 == true && dartOnePot.get() > 324 && dartTwoPot.get() < 327){
+        dartTwo.set(.8);
       }else{
         dartOne.set(0);
         dartTwo.set(0);
@@ -226,9 +239,9 @@ public class Robot extends TimedRobot {
       
       //If/Else for the Wrist
       if(joystickBtns[5] == true){
-        wrist.set(0.25);
+        wrist.set(0.50);
       }else if(joystickBtns[6] == true){
-        wrist.set(-.25);
+        wrist.set(-.50);
       }else{
         wrist.set(0);
       }
