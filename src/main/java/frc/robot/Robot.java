@@ -193,47 +193,67 @@ public class Robot extends TimedRobot {
       //Sets how the darts should react, given various inputs
       if(joystickBtns[1] == true && dartOneExtendLimit.get() == true && dartTwoRetractLimit.get() == false){
         dartOne.set(.50);
+        SmartDashboard.putString("What is happening?", "Dart One up 50%");
       }else if(joystickBtns[1] == true && dartOneExtendLimit.get() == true && dartTwoRetractLimit.get() == true){
         dartTwo.set(-.50);
         dartOne.set(.10);
+        SmartDashboard.putString("What is happening?", "Dart One up 10%, Dart Two down 50%");
       }else if(joystickBtns[2] == true && dartOneRetractLimit.get() == true && dartTwoRetractLimit.get() == false){
         dartOne.set(-.50);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
       }else if(joystickBtns[2] == true && dartOneRetractLimit.get() == true && dartTwoRetractLimit.get() == true){
         dartTwo.set(-.50);
         dartOne.set(-.10);
+        SmartDashboard.putString("What is happening?", "Dart One down 10%, Dart Two down 50%");
       }else if(joystickBtns[3] == true && dartTwoRetractLimit.get() == true){
         dartTwo.set(-.50);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
       }else if(joystickBtns[4] == true && dartTwoExtendLimit.get() == true){
         dartTwo.set(.50);
+        SmartDashboard.putString("What is happening?", "Dart Two up 50%");
       }else if(joystickBtns[4] == true && dartTwoExtendLimit.get() == true && dartOneExtendLimit.get() == false){
         dartTwo.set(1);
+        SmartDashboard.putString("What is happening?", "Dart Two up 100%");
       }else if(operatorBoardBtns[8] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 170 == true && dartOneRetractLimit.get() == true){
         dartOne.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
       }else if(operatorBoardBtns[8] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 150 == true && dartOneExtendLimit.get() == true){
         dartOne.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart One up 80%");
       }else if(operatorBoardBtns[8] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 170 && dartOnePot.get() > 150 && dartTwoPot.get() > 220 && _operatorJoystickButtons[10] == true){
         dartTwo.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
       }else if(operatorBoardBtns[8] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 170 && dartOnePot.get() > 150 && dartTwoPot.get() < 216 && _operatorJoystickButtons[10] == true){
         dartTwo.set(.5);
+        SmartDashboard.putString("What is happening?", "Dart Two up 50%");
       }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 242 == true){
         dartOne.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
       }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 238 == true){
         dartOne.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart One up 80%");
       }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 244 && dartOnePot.get() > 236 && dartTwoPot.get() > 137 && _operatorJoystickButtons[10] == true){
         dartTwo.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
       }else if(operatorBoardBtns[9] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 244 && dartOnePot.get() > 236 && dartTwoPot.get() < 133 && _operatorJoystickButtons[10] == true){
         dartTwo.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart Two up 80%");
       }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 332 == true){
         dartOne.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
       }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 328 == true){
         dartOne.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart One up 80%");
       }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 334 == true && dartOnePot.get() > 324 == true && dartTwoPot.get() > 331 && _operatorJoystickButtons[10] == true){
         dartTwo.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
       }else if(operatorBoardBtns[10] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 334 == true && dartOnePot.get() > 324 && dartTwoPot.get() < 327 && _operatorJoystickButtons[10] == true){
         dartTwo.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart Two up 80%");
       }else{
         dartOne.set(0);
         dartTwo.set(0);
+        SmartDashboard.putString("What is happening?", "Both Darts 0%");
       }
 
 
