@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
 
   //Defines intake/output
   WPI_TalonSRX spinner = new WPI_TalonSRX(7);
-  Solenoid puncher = new Solenoid(0);
+  Solenoid puncher = new Solenoid(2);
 
 
   //Defines the operator console
@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
 
   //Defines the 'Climber'
   Solenoid climberFront = new Solenoid(1);
+  Solenoid climberBack = new Solenoid(0);
 
 
 
@@ -108,6 +109,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    teleopInit();
   }
 
 
@@ -117,6 +119,7 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     //Sets Auto to run the Teleop code.
     teleopPeriodic();
+
     }
 
 
@@ -173,7 +176,7 @@ public class Robot extends TimedRobot {
 
     
     //Puts the above code together to actually move the robot
-    mainDrive.arcadeDrive(forward * -driveSpeedMultiplier * -1, turn * driveSpeedMultiplier);
+    mainDrive.arcadeDrive(forward * -driveSpeedMultiplier, turn * driveSpeedMultiplier);
 
 
     //Defines the Joystick Buttons
@@ -206,11 +209,11 @@ public class Robot extends TimedRobot {
         dartOne.set(-.10);
         SmartDashboard.putString("What is happening?", "Dart One down 10%, Dart Two down 50%");
       }else if(joystickBtns[3] == true && dartTwoRetractLimit.get() == true){
-        dartTwo.set(-.50);
-        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
+        dartTwo.set(-.80);
+        SmartDashboard.putString("What is happening?", "Dart Two down 80%");
       }else if(joystickBtns[4] == true && dartTwoExtendLimit.get() == true){
-        dartTwo.set(.50);
-        SmartDashboard.putString("What is happening?", "Dart Two up 50%");
+        dartTwo.set(.80);
+        SmartDashboard.putString("What is happening?", "Dart Two up 80%");
       }else if(joystickBtns[4] == true && dartTwoExtendLimit.get() == true && dartOneExtendLimit.get() == false){
         dartTwo.set(1);
         SmartDashboard.putString("What is happening?", "Dart Two up 100%");
@@ -220,10 +223,10 @@ public class Robot extends TimedRobot {
       }else if(operatorBoardBtns[8] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 150 == true && dartOneExtendLimit.get() == true){
         dartOne.set(.8);
         SmartDashboard.putString("What is happening?", "Dart One up 80%");
-      }else if(operatorBoardBtns[8] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 170 && dartOnePot.get() > 150 && dartTwoPot.get() > 220 && _operatorJoystickButtons[10] == true){
+      }else if(operatorBoardBtns[8] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 170 && dartOnePot.get() > 150 && dartTwoPot.get() > 220 && joystickBtns[10] == true){
         dartTwo.set(-.5);
         SmartDashboard.putString("What is happening?", "Dart Two down 50%");
-      }else if(operatorBoardBtns[8] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 170 && dartOnePot.get() > 150 && dartTwoPot.get() < 216 && _operatorJoystickButtons[10] == true){
+      }else if(operatorBoardBtns[8] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 170 && dartOnePot.get() > 150 && dartTwoPot.get() < 216 && joystickBtns[10] == true){
         dartTwo.set(.5);
         SmartDashboard.putString("What is happening?", "Dart Two up 50%");
       }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 242 == true){
@@ -232,10 +235,10 @@ public class Robot extends TimedRobot {
       }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 238 == true){
         dartOne.set(.8);
         SmartDashboard.putString("What is happening?", "Dart One up 80%");
-      }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 244 && dartOnePot.get() > 236 && dartTwoPot.get() > 137 && _operatorJoystickButtons[10] == true){
+      }else if(operatorBoardBtns[9] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 244 && dartOnePot.get() > 236 && dartTwoPot.get() > 137 && joystickBtns[10] == true){
         dartTwo.set(-.5);
         SmartDashboard.putString("What is happening?", "Dart Two down 50%");
-      }else if(operatorBoardBtns[9] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 244 && dartOnePot.get() > 236 && dartTwoPot.get() < 133 && _operatorJoystickButtons[10] == true){
+      }else if(operatorBoardBtns[9] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 244 && dartOnePot.get() > 236 && dartTwoPot.get() < 133 && joystickBtns[10] == true){
         dartTwo.set(.8);
         SmartDashboard.putString("What is happening?", "Dart Two up 80%");
       }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 332 == true){
@@ -244,10 +247,70 @@ public class Robot extends TimedRobot {
       }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 328 == true){
         dartOne.set(.8);
         SmartDashboard.putString("What is happening?", "Dart One up 80%");
-      }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 334 == true && dartOnePot.get() > 324 == true && dartTwoPot.get() > 331 && _operatorJoystickButtons[10] == true){
+      }else if(operatorBoardBtns[10] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 334 == true && dartOnePot.get() > 324 == true && dartTwoPot.get() > 204 && joystickBtns[10] == true){
         dartTwo.set(-.5);
         SmartDashboard.putString("What is happening?", "Dart Two down 50%");
-      }else if(operatorBoardBtns[10] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 334 == true && dartOnePot.get() > 324 && dartTwoPot.get() < 327 && _operatorJoystickButtons[10] == true){
+      }else if(operatorBoardBtns[10] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 334 == true && dartOnePot.get() > 324 && dartTwoPot.get() < 200 && joystickBtns[10] == true){
+        dartTwo.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart Two up 80%");
+      }else if(operatorBoardBtns[11] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 159 == true){
+        dartOne.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
+      }else if(operatorBoardBtns[11] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 155 == true){
+        dartOne.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart One up 80%");
+      }else if(operatorBoardBtns[11] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 159 == true && dartOnePot.get() > 155 == true && dartTwoPot.get() > 140 == true && joystickBtns[10] == true){
+        dartTwo.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
+      }else if(operatorBoardBtns[11] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 159 == true && dartOnePot.get() > 155 == true && dartTwoPot.get() < 136 == true && joystickBtns[10] == true){
+        dartTwo.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart Two up 80%");
+      }else if(operatorBoardBtns[12] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 255  == true){
+        dartOne.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
+      }else if(operatorBoardBtns[12] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 251 == true){
+        dartOne.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart One up 80%");
+      }else if(operatorBoardBtns[12] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 255 == true && dartOnePot.get() > 253 == true && dartTwoPot.get() > 163 == true && joystickBtns[10] == true){
+        dartTwo.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
+      }else if(operatorBoardBtns[12] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 255 == true && dartOnePot.get() > 253 == true && dartTwoPot.get() < 159 == true && joystickBtns[10] == true){
+        dartTwo.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart Two up 80%");
+      }else if(operatorBoardBtns[13] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 332  == true){
+        dartOne.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
+      }else if(operatorBoardBtns[13] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 328 == true){
+        dartOne.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart One up 80%");
+      }else if(operatorBoardBtns[13] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 332 == true && dartOnePot.get() > 328 == true && dartTwoPot.get() > 192 == true && joystickBtns[10] == true){
+        dartTwo.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
+      }else if(operatorBoardBtns[13] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 332 == true && dartOnePot.get() > 328 == true && dartTwoPot.get() < 188 == true && joystickBtns[10] == true){
+        dartTwo.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart Two up 80%");
+      }else if(operatorBoardBtns[14] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 158  == true){
+        dartOne.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
+      }else if(operatorBoardBtns[14] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 154 == true){
+        dartOne.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart One up 80%");
+      }else if(operatorBoardBtns[14] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 158 == true && dartOnePot.get() > 154 == true && dartTwoPot.get() > 181 == true && joystickBtns[10] == true){
+        dartTwo.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
+      }else if(operatorBoardBtns[14] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 158 == true && dartOnePot.get() > 154 == true && dartTwoPot.get() < 179 == true && joystickBtns[10] == true){
+        dartTwo.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart Two up 80%");
+      }else if(operatorBoardBtns[17] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() > 158  == true){
+        dartOne.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart One down 50%");
+      }else if(operatorBoardBtns[17] == true && dartTwoRetractLimit.get() == false && dartOnePot.get() < 154 == true){
+        dartOne.set(.8);
+        SmartDashboard.putString("What is happening?", "Dart One up 80%");
+      }else if(operatorBoardBtns[17] == true && dartTwoRetractLimit.get() == true && dartOnePot.get() < 158 == true && dartOnePot.get() > 154 == true && dartTwoPot.get() > 82 == true && joystickBtns[10] == true){
+        dartTwo.set(-.5);
+        SmartDashboard.putString("What is happening?", "Dart Two down 50%");
+      }else if(operatorBoardBtns[17] == true && dartTwoExtendLimit.get() == true && dartOnePot.get() < 158 == true && dartOnePot.get() > 154 == true && dartTwoPot.get() < 78 == true && joystickBtns[10] == true){
         dartTwo.set(.8);
         SmartDashboard.putString("What is happening?", "Dart Two up 80%");
       }else{
@@ -291,22 +354,24 @@ public class Robot extends TimedRobot {
       //If/Else for the Hatch Panel intake/output
       if(joystickBtns[11] == true){
         puncher.set(true);
-      }else if(joystickBtns[12] == true){
-        puncher.set(false);
       }else{
         puncher.set(false);
       }
 
       //If/Else for the front climber pistons
-      if(driverJoystickBtns[7] == true){
+      if(driverJoystickBtns[9] == true){
         climberFront.set(true);
-      }else if(driverJoystickBtns[8] == true){
+      }else if(driverJoystickBtns[11] == true){
         climberFront.set(false);
       }
 
+      if(driverJoystickBtns[10] == true){
+        climberBack.set(true);
+      }else if(driverJoystickBtns[12] == true){
+        climberBack.set(false);
+      }
       
   }
-
 
 
 
